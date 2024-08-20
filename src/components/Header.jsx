@@ -1,14 +1,48 @@
-import CustomLink from "./CustomLink";
+import { useLogout } from "../hooks/useLogout.js";
+import useAuthContext from "../hooks/useAuthContext.js";
+import CustomLink from "./CustomLink.jsx";
+import Modal from "./Moda.jsx";
+import { useState } from "react";
 
 function Header() {
+    const { logout } = useLogout();
+    const { user } = useAuthContext();
+
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const onLogout = () => {
+        logout()
+    }
+
     return (
-        <div className='bg-toodark sticky top-0 z-50'>
-            <div className='max-width h-16 flex font-custom tod justify-between items-center p-5 text-toolite font-bold'>
-                <CustomLink to={"/"}>Home</CustomLink>
-                <CustomLink to={"/details"}>Details</CustomLink>
-            </div>
-        </div>
+        <header className="bg-toodark sticky top-0 z-50">
+            <nav className='flex justify-between items-center h-16 p-4 max-width'>
+                <div className="text-white font-bold text-xl">
+                    <CustomLink to="/" routeName="Expenses App" />
+                </div>
+                {user && (
+                    <div className="flex flex-col xs:flex-row xs:space-x-2 justify-center items-center text-white">
+                        <p>{user.email}</p>
+                        <button onClick={() => setModalOpen(true)} className="btn-sm xs:btn">Logout</button>
+                    </div>
+                )}
+                {!user && (
+                    <div className="text-white flex flex-row space-x-5">
+                        <CustomLink to="/login" routeName="Login" />
+                        <CustomLink to="/signup" routeName="Signup" />
+                    </div>
+                )}
+            </nav>
+            <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+                <div className='w-full flex flex-col items-center rounded'>
+                    <p className='text-dark font-bold'>Are you sure to Logout?</p>
+                    <button className='btn text-red-500 hover:text-red-800' onClick={onLogout}>
+                        Logout
+                    </button>
+                </div>
+            </Modal>
+        </header>
     )
 }
 
-export default Header
+export default Header;

@@ -2,12 +2,12 @@ import { Link, useMatch, useResolvedPath } from 'react-router-dom'
 
 const CustomLink = (props) => {
     const obj = props;
-    const { to, children } = obj;
+    const { to, routeName } = obj;
 
     const isActive = useMatch({ path: useResolvedPath(to).pathname, end: true });
 
     return (
-        <Link className={isActive ? 'text-active' : ''} to={to}>{children}</Link>
+        <Link className={isActive ? 'btn text-active' : 'btn'} to={to}>{routeName}</Link>
     );
 };
 

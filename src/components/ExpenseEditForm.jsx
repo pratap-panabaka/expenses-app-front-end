@@ -3,7 +3,7 @@ import host from "../host";
 import useAuthContext from "../hooks/useAuthContext";
 import useExpensesContext from "../hooks/useExpensesContext";
 
-const AddExpenseForm = () => {
+const ExpenseEditForm = () => {
 
     const { user } = useAuthContext();
     const {organiseExpenses} = useExpensesContext();
@@ -62,4 +62,4 @@ const AddExpenseForm = () => {
     )
 }
 
-export default AddExpenseForm;
+export default ExpenseEditForm;

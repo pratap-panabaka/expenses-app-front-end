@@ -15,10 +15,10 @@ export default {
     },
     extend: {
       colors: {
-        lite: "#ececec",
-        toolite: "#EFF6E0",
-        dark: "#124559",
-        toodark: "#01161E",
+        toolite: "#FBF2c0",
+        lite: "#c06352",
+        dark: "#f96f5d",
+        toodark: "#43281c",
         active: "#FA824C"
       },
       fontFamily: {

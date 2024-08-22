@@ -1,7 +1,7 @@
 import { useLogout } from "../hooks/useLogout.js";
 import useAuthContext from "../hooks/useAuthContext.js";
 import CustomLink from "./CustomLink.jsx";
-import Modal from "./Moda.jsx";
+import Modal from "./Modal.jsx";
 import { useState } from "react";
 
 function Header() {
@@ -18,7 +18,7 @@ function Header() {
         <header className="bg-toodark sticky top-0 z-50">
             <nav className='flex justify-between items-center h-16 p-4 max-width'>
                 <div className="text-white font-bold text-xl">
-                    <CustomLink to="/" routeName="Expenses App" />
+                    Expenses App
                 </div>
                 {user && (
                     <div className="flex flex-col xs:flex-row xs:space-x-2 justify-center items-center text-white">
@@ -34,8 +34,8 @@ function Header() {
                 )}
             </nav>
             <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-                <div className='w-full flex flex-col items-center rounded'>
-                    <p className='text-dark font-bold'>Are you sure to Logout?</p>
+                <div className='flex flex-col items-center rounded bg-blue-500 p-5'>
+                    <p className='font-bold text-white'>Are you sure to Logout?</p>
                     <button className='btn text-red-500 hover:text-red-800' onClick={onLogout}>
                         Logout
                     </button>

@@ -15,7 +15,7 @@ export default {
     },
     extend: {
       colors: {
-        lite: "#AEC3B0",
+        lite: "#ececec",
         toolite: "#EFF6E0",
         dark: "#124559",
         toodark: "#01161E",

@@ -11,7 +11,8 @@ function Header() {
     const [modalOpen, setModalOpen] = useState(false);
 
     const onLogout = () => {
-        logout()
+        logout();
+        setModalOpen(false);
     }
 
     return (

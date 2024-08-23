@@ -4,10 +4,10 @@ import expensesReducer from "../reducers/exensesReducer";
 const ExpensesContext = createContext(null);
 
 const ExpensesContextProvider = ({ children }) => {
-    const [expenses, organiseExpenses] = useReducer(expensesReducer, null);
+    const [expenses, dispatch] = useReducer(expensesReducer, null);
 
     return (
-        <ExpensesContext.Provider value={{ ...expenses, organiseExpenses }}>
+        <ExpensesContext.Provider value={{ ...expenses, dispatch }}>
             {children}
         </ExpensesContext.Provider>
     )

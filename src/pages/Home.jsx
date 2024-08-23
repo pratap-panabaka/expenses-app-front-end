@@ -3,13 +3,15 @@ import useAuthContext from "../hooks/useAuthContext";
 import useExpensesContext from '../hooks/useExpensesContext.js';
 import host from '../host.js';
 import ExpenseForm from '../components/ExpenseForm.jsx';
+import Modal from '../components/Modal.jsx';
 
 function Home() {
     const { user } = useAuthContext();
 
-    const { expenses, organiseExpenses } = useExpensesContext();
+    const { expenses, dispatch } = useExpensesContext();
 
     const [openForm, setOpenForm] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(() => {
         const getExpenses = async () => {
@@ -19,14 +21,12 @@ function Home() {
                 }
             });
             const json = await response.json(); // expect array of objects
-            console.log(json);
-            organiseExpenses({ type: 'GET_EXPENSES', payload: json });
-            console.log('expenses', expenses);
+            dispatch({ type: 'GET_EXPENSES', payload: json });
         }
         if (user) {
             getExpenses();
         }
-    }, [user, organiseExpenses, expenses])
+    }, [user, dispatch])
 
     const onEdit = (e) => {
         console.log(e.target.id);
@@ -45,7 +45,7 @@ function Home() {
             });
             const json = await response.json();
             if (response.ok) {
-                organiseExpenses({ type: 'DEL_EXPENSE', payload: {id, sum: json.sum} });
+                dispatch({ type: 'DEL_EXPENSE', payload: { id, sum: json.sum } });
             }
         }
         if (user) {
@@ -56,18 +56,18 @@ function Home() {
     return (
         <>
             <div className="bg-toolite">
-                <div className='max-width p-5 center-div justify-start bg-lite'>
-                    <button onClick={() => setOpenForm(!openForm)} className='btn w-full hover:bg-green-500'>Add a expense</button>
-                    {openForm && <ExpenseForm />}
+                <div className='max-width bg-lite'>
+                    {/* <button onClick={() => setOpenForm(!openForm)} className='btn w-full hover:bg-toodark'>{openForm ? '-' : '+'}</button>
+                    {openForm && <ExpenseForm />} */}
                     {
                         expenses &&
-                        <table className='w-full table-auto'>
+                        <table className='border-collapse table-auto w-full whitespace-nowrap'>
                             <thead>
-                                <tr>
+                                <tr className='bg-black text-white sticky top-[4rem]'>
                                     <th>S.No</th>
                                     <th>Description</th>
                                     <th>Amount</th>
-                                    <th>Actions</th>
+                                    <th colSpan={2}>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,12 +80,10 @@ function Home() {
                                             <td>{expense.amount}</td>
                                             <td>
                                                 {
-                                                    <div className='flex justify-around gap-2'>
-                                                        <button id={expense.id} onClick={onEdit} className='btn'>Edit</button>
-                                                        <button id={expense.id} onClick={onDel} className='btn'>Del</button>
-                                                    </div>
+                                                    <button id={expense.id} onClick={() => setModalOpen(true)}>Edit</button>
                                                 }
                                             </td>
+                                            <td><button id={expense.id} onClick={onDel}>Del</button></td>
                                         </tr>
                                     )
                                     )
@@ -101,6 +99,9 @@ function Home() {
                             </tbody>
                         </table>
                     }
+                    <Modal open={modalOpen} onClose={() => setModalOpen(false)} autoFocus={false}>
+                        <ExpenseForm />
+                    </Modal>
                 </div>
             </div>
         </>

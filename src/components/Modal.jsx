@@ -20,9 +20,8 @@ function Modal(props) {
 
     return (
         // backdrop
-        <div className={`absolute top-0 left-0 w-screen h-screen flex text-center justify-center items-center transition-colors p-5
+        <div className={`absolute top-0 left-0 w-screen h-screen flex text-center justify-center items-center p-5
                 ${open ? "visible bg-black/80" : "invisible"}`}
-            onClick={onClose}
         >
             {children}
         </div >

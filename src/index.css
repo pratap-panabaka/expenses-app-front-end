@@ -45,15 +45,37 @@
     @apply outline-none px-4 py-2 bg-toolite text-toodark hover:bg-lite hover:text-dark font-bold
   }
 
-  table, th, td {
-    border: 1px solid;
+  html {
+    overflow-x: hidden;
   }
 
-  th, td {
-    padding: 15px;
-    text-align: left;
-    white-space: nowrap; /* Only needed when it's set differntly somewhere else */
-    word-wrap: break-word;
-    word-break: break-all;
+  thead th {
+    border-collapse: separate;
+    background-color: tomato;
+    border: 1px solid;
+    border-top: none;
+    z-index: 1;
+    position: sticky;
+    top: 4rem;
+  }
+
+  td {
+    border: 1px solid;
+    height: 24px;
+    padding: 5px;
+    text-align: center;
+  }
+
+  td + td + td {
+    text-align: right;
+    font-weight: bold;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #eee;
+  }
+
+  tr:nth-child(even) {
+    background-color: aqua;
   }
 }

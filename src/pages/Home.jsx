@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react';
 import useAuthContext from "../hooks/useAuthContext";
 import useExpensesContext from '../hooks/useExpensesContext.js';
 import host from '../host.js';
-import ExpenseForm from '../components/ExpenseForm.jsx';
 import Modal from '../components/Modal.jsx';
+import useModalContext from '../hooks/useModalContext.js';
 
 function Home() {
     const { user } = useAuthContext();
-
     const { expenses, dispatch } = useExpensesContext();
+    const { setModalOpen } = useModalContext();
 
-    const [openForm, setOpenForm] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false);
+    const [popup, setPopup] = useState(null);
+    const [id, setId] = useState(null);
 
     useEffect(() => {
         const getExpenses = async () => {
@@ -29,41 +29,27 @@ function Home() {
     }, [user, dispatch])
 
     const onEdit = (e) => {
-        console.log(e.target.id);
+        setId(e.target.id);
+        setPopup('edit');
+        setModalOpen(true);
     }
 
     const onDel = (e) => {
-        const id = e.target.id;
-        const delExpense = async () => {
-            const response = await fetch(`${host}/api/expenses`, {
-                method: "DELETE",
-                body: JSON.stringify({ id }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${user.token}`
-                }
-            });
-            const json = await response.json();
-            if (response.ok) {
-                dispatch({ type: 'DEL_EXPENSE', payload: { id, sum: json.sum } });
-            }
-        }
-        if (user) {
-            delExpense();
-        }
+        setId(e.target.id);
+        setPopup('delete');
+        setModalOpen(true);
     }
 
     return (
         <>
             <div className="bg-toolite">
-                <div className='max-width bg-lite'>
-                    {/* <button onClick={() => setOpenForm(!openForm)} className='btn w-full hover:bg-toodark'>{openForm ? '-' : '+'}</button>
-                    {openForm && <ExpenseForm />} */}
+                <div className='max-width min-height bg-lite'>
+                    <h1 className='text-center text-white font-bold text-xl p-4'>Expenses List</h1>
                     {
                         expenses &&
-                        <table className='border-collapse table-auto w-full whitespace-nowrap'>
+                        <table className='table-auto w-full'>
                             <thead>
-                                <tr className='bg-black text-white sticky top-[4rem]'>
+                                <tr>
                                     <th>S.No</th>
                                     <th>Description</th>
                                     <th>Amount</th>
@@ -78,30 +64,30 @@ function Home() {
                                             <td>{idx + 1}</td>
                                             <td>{expense.description}</td>
                                             <td>{expense.amount}</td>
-                                            <td>
+                                            <td className='text-center'>
                                                 {
-                                                    <button id={expense.id} onClick={() => setModalOpen(true)}>Edit</button>
+                                                    <button className="w-fit mx-auto bg-toodark text-white border-rounded-large px-5 py-1" id={expense.id} onClick={onEdit}>Edit</button>
                                                 }
                                             </td>
-                                            <td><button id={expense.id} onClick={onDel}>Del</button></td>
+                                            <td className='text-center'>
+                                                {
+                                                    <button className="w-fit mx-auto bg-toodark text-white border-rounded-large px-5 py-1" id={expense.id} onClick={onDel}>Delete</button>
+                                                }
+                                            </td>
                                         </tr>
-                                    )
-                                    )
+                                    ))
                                 }
                                 {
                                     <tr>
-                                        <td>{ }</td>
-                                        <td>Total</td>
-                                        <td className='font-bold text-2xl text-toodark'>{expenses.sum}</td>
-                                        <td>{ }</td>
+                                        <td colSpan={2}>Total</td>
+                                        <td className='font-bold text-2xl text-toodark text-right'>{expenses.sum}</td>
+                                        <td colSpan={2}>{ }</td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
                     }
-                    <Modal open={modalOpen} onClose={() => setModalOpen(false)} autoFocus={false}>
-                        <ExpenseForm />
-                    </Modal>
+                    <Modal popup={popup} id={id} />
                 </div>
             </div>
         </>

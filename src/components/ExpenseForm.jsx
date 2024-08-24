@@ -2,11 +2,13 @@ import { useState } from "react";
 import host from "../host";
 import useAuthContext from "../hooks/useAuthContext";
 import useExpensesContext from "../hooks/useExpensesContext";
+import useModalContext from "../hooks/useModalContext";
 
 const ExpenseForm = () => {
 
     const { user } = useAuthContext();
     const { dispatch } = useExpensesContext();
+    const { setModalOpen } = useModalContext();
 
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
@@ -42,6 +44,7 @@ const ExpenseForm = () => {
         setAmount('');
         setError('');
         e.target.reset();
+        setModalOpen(false);
     }
 
     return (

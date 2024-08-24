@@ -17,7 +17,7 @@ function Header() {
 
     return (
         <header className="bg-toodark sticky top-0 z-50">
-            <nav className='flex justify-between items-center h-16 p-4 max-width'>
+            <nav className='flex justify-between items-center h-[4rem] p-4 max-width'>
                 <div className="text-white font-bold text-xl">
                     Expenses App
                 </div>

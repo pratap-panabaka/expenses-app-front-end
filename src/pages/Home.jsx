@@ -4,14 +4,13 @@ import useExpensesContext from '../hooks/useExpensesContext.js';
 import host from '../host.js';
 import Modal from '../components/Modal.jsx';
 import useModalContext from '../hooks/useModalContext.js';
+import Portal from '../components/Portal.jsx';
+import ModalContent from '../components/ModalContent.jsx';
 
 function Home() {
     const { user } = useAuthContext();
     const { expenses, dispatch } = useExpensesContext();
     const { setModalOpen } = useModalContext();
-
-    const [popup, setPopup] = useState(null);
-    const [id, setId] = useState(null);
 
     useEffect(() => {
         const getExpenses = async () => {
@@ -43,7 +42,7 @@ function Home() {
     return (
         <>
             <div className="bg-toolite">
-                <div className='max-width min-height bg-lite'>
+                <div className='max-width min-height bg-lite overflow-x-hidden'>
                     <h1 className='text-center text-white font-bold text-xl p-4'>Expenses List</h1>
                     {
                         expenses &&
@@ -65,14 +64,10 @@ function Home() {
                                             <td>{expense.description}</td>
                                             <td>{expense.amount}</td>
                                             <td className='text-center'>
-                                                {
-                                                    <button className="w-fit mx-auto bg-toodark text-white border-rounded-large px-5 py-1" id={expense.id} onClick={onEdit}>Edit</button>
-                                                }
+                                                <Portal id={expense.id} action={"edit"} />
                                             </td>
                                             <td className='text-center'>
-                                                {
-                                                    <button className="w-fit mx-auto bg-toodark text-white border-rounded-large px-5 py-1" id={expense.id} onClick={onDel}>Delete</button>
-                                                }
+                                                <Portal id={expense.id} action={"delete"} />
                                             </td>
                                         </tr>
                                     ))
@@ -87,7 +82,6 @@ function Home() {
                             </tbody>
                         </table>
                     }
-                    <Modal popup={popup} id={id} />
                 </div>
             </div>
         </>

@@ -1,7 +1,7 @@
 const expensesReducer = (state, action) => {
     switch (action.type) {
         case 'GET_EXPENSES': {
-            let expenses = {...action.payload}
+            let expenses = { ...action.payload }
             return { expenses };
         }
 
@@ -10,7 +10,16 @@ const expensesReducer = (state, action) => {
                 data: [...action.payload.data, ...state.expenses.data],
                 sum: action.payload.sum
             }
-            return {expenses};
+            return { expenses };
+        }
+
+        case 'UPDATE_EXPENSE': {
+            let {amount, description, id, sum} = action.payload;
+            const expenses = {
+                data: state.expenses.data.map(expense => expense.id == id ? {...expense, amount, description } : expense),
+                sum
+            }
+            return { expenses };
         }
 
         case 'DEL_EXPENSE': {
@@ -19,7 +28,7 @@ const expensesReducer = (state, action) => {
                 data: state.expenses.data.filter(expense => expense.id != id),
                 sum
             }
-            return {expenses};
+            return { expenses };
         }
 
         default: {

@@ -4,9 +4,11 @@ const ModalContext = createContext(false);
 
 const ModalContextProvider = ({children}) => {
     const [modalOpen, setModalOpen] = useState(false);
+    const [popup, setPopup] = useState(null);
+    const [id, setId] = useState(null);
 
     return (
-        <ModalContext.Provider value={{modalOpen, setModalOpen}}>
+        <ModalContext.Provider value={{modalOpen, setModalOpen, popup, setPopup, id, setId}}>
             {children}
         </ModalContext.Provider>
 

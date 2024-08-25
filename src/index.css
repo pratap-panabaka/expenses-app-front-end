@@ -45,10 +45,6 @@
     @apply outline-none px-4 py-2 bg-toolite text-toodark hover:bg-lite hover:text-dark font-bold
   }
 
-  html {
-    overflow-x: hidden;
-  }
-
   thead th {
     border-collapse: separate;
     background-color: tomato;
@@ -77,5 +73,9 @@
 
   tr:nth-child(even) {
     background-color: aqua;
+  }
+
+  body {
+    overflow-x: hidden;
   }
 }

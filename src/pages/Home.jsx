@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import useAuthContext from "../hooks/useAuthContext";
 import useExpensesContext from '../hooks/useExpensesContext.js';
 import host from '../host.js';
-import Modal from '../components/Modal.jsx';
 import useModalContext from '../hooks/useModalContext.js';
-import Portal from '../components/Portal.jsx';
-import ModalContent from '../components/ModalContent.jsx';
+import Portal from '../components/Portal';
 
 function Home() {
     const { user } = useAuthContext();
@@ -27,23 +25,15 @@ function Home() {
         }
     }, [user, dispatch])
 
-    const onEdit = (e) => {
-        setId(e.target.id);
-        setPopup('edit');
-        setModalOpen(true);
-    }
-
-    const onDel = (e) => {
-        setId(e.target.id);
-        setPopup('delete');
-        setModalOpen(true);
-    }
-
     return (
         <>
             <div className="bg-toolite">
                 <div className='max-width min-height bg-lite overflow-x-hidden'>
-                    <h1 className='text-center text-white font-bold text-xl p-4'>Expenses List</h1>
+                    <div className='grid grid-cols-3 items-center'>
+                        <p>{ }</p>
+                        <h1 className='text-center text-white font-bold text-xl p-4'>Expenses List</h1>
+                        <Portal action={"add"} />
+                    </div>
                     {
                         expenses &&
                         <table className='table-auto w-full'>

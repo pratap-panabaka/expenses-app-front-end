@@ -34,7 +34,6 @@ const ExpenseForm = () => {
                 }
             });
             const json = await response.json();
-            console.log(json);
             dispatch({ type: 'ADD_EXPENSE', payload: json })
         } catch (error) {
             console.log(error);
@@ -48,14 +47,14 @@ const ExpenseForm = () => {
     }
 
     return (
-        <div className="max-width">
-            <form className="flex flex-col gap-5 p-5 bg-lite w-full" onSubmit={addExpense}>
-                <input placeholder="description" type="text" value={description}
+        <div className="max-width z-50">
+            <form className="flex flex-col gap-5 p-5 bg-lite w-full border-4" onSubmit={addExpense}>
+                <input placeholder="description" type="text" value={description || ''}
                     onChange={(e) => setDescription(e.target.value)} required name="desc"
                     autoComplete="off"
                     autoFocus
                 />
-                <input placeholder="amount" type="number" value={amount} min={0}
+                <input placeholder="amount" type="number" value={amount || ''} min={0}
                     onChange={(e) => setAmount(e.target.value)} required name="amount"
                 />
                 <button type="submit" className='p-2 font-bold w-fit mx-auto text-white bg-toodark hover:text-toolite focus:ring-4'>

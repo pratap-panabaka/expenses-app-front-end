@@ -7,13 +7,12 @@ const DeleteConfirmation = () => {
 
     const { user } = useAuthContext();
     const { dispatch } = useExpensesContext();
-    const {setModalOpen, id} = useModalContext();
+    const { setModalOpen, id } = useModalContext();
 
     const onDel = () => {
         const delExpense = async () => {
-            const response = await fetch(`${host}/api/expenses`, {
+            const response = await fetch(`${host}/api/${id}`, {
                 method: "DELETE",
-                body: JSON.stringify({ id }),
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${user.token}`
@@ -21,7 +20,6 @@ const DeleteConfirmation = () => {
             });
             const json = await response.json();
             if (response.ok) {
-                console.log(id);
                 dispatch({ type: 'DEL_EXPENSE', payload: { id, sum: json.sum } });
                 setModalOpen(false);
             }
@@ -32,9 +30,12 @@ const DeleteConfirmation = () => {
     }
 
     return (
-        <div className="bg-white z-50 p-20">
-            <h1>Are you sure to Delete?</h1>
-            <button className="btn" onClick={onDel}>Delete</button>
+        <div className="bg-lite z-50 p-5 border-4">
+            <h1 className="font-bold text-white text-xl p-5">Are you sure to Delete?</h1>
+            <div className="flex gap-2 justify-center">
+                <button className="btn focus:ring-4 focus:ring-toodark" onClick={onDel} autoFocus>Delete</button>
+                <button className="btn focus:ring-4 focus:ring-toodark" onClick={() => setModalOpen(false)}>No</button>
+            </div>
         </div>
     )
 }

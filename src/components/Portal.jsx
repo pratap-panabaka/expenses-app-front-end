@@ -11,9 +11,33 @@ export default function Portal({action, id}) {
         setId(e.target.id);
     }
 
+    let buttonTitle;
+
+    switch (action) {
+        case 'logout': {
+            buttonTitle = 'Logout';
+            break;
+        }
+
+        case 'add': {
+            buttonTitle = 'Add';
+            break;
+        }
+
+        case 'edit': {
+            buttonTitle = 'Edit';
+            break;
+        }
+
+        case 'delete': {
+            buttonTitle = 'Delete';
+            break;
+        }
+    }
+
     return (
         <>
-            <button className="w-fit mx-auto bg-toodark text-white border-rounded-large px-5 py-1" id={id} onClick={onClick}>{action}</button>
+            <button className="w-fit mx-auto bg-toodark text-white font-bold border-rounded-large px-5 py-1" id={id} onClick={onClick}>{buttonTitle}</button>
             {modalOpen && createPortal(
                 <ModalContent />,
                 document.body

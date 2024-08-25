@@ -1,19 +1,9 @@
-import { useLogout } from "../hooks/useLogout.js";
 import useAuthContext from "../hooks/useAuthContext.js";
-import CustomLink from "./CustomLink.jsx";
-import Modal from "./Modal.jsx";
-import { useState } from "react";
+import CustomLink from "./CustomLink";
+import Portal from "./Portal";
 
 function Header() {
-    const { logout } = useLogout();
     const { user } = useAuthContext();
-
-    const [modalOpen, setModalOpen] = useState(false);
-
-    const onLogout = () => {
-        logout();
-        setModalOpen(false);
-    }
 
     return (
         <header className="bg-toodark sticky top-0 z-50">
@@ -24,7 +14,7 @@ function Header() {
                 {user && (
                     <div className="flex flex-col xs:flex-row xs:space-x-2 justify-center items-center text-white">
                         <p>{user.email}</p>
-                        <button onClick={() => setModalOpen(true)} className="btn-sm xs:btn">Logout</button>
+                        <Portal action={"logout"} />
                     </div>
                 )}
                 {!user && (
@@ -34,14 +24,6 @@ function Header() {
                     </div>
                 )}
             </nav>
-            <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-                <div className='flex flex-col items-center rounded bg-blue-500 p-5'>
-                    <p className='font-bold text-white'>Are you sure to Logout?</p>
-                    <button className='btn text-red-500 hover:text-red-800' onClick={onLogout}>
-                        Logout
-                    </button>
-                </div>
-            </Modal>
         </header>
     )
 }

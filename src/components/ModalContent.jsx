@@ -3,6 +3,7 @@ import useModalContext from "../hooks/useModalContext";
 import EditForm from "./EditForm";
 import DeleteConfirmation from "./DeleteConfirmation";
 import ExpenseForm from "./ExpenseForm";
+import Logout from "./Logout";
 
 export default function ModalContent() {
 
@@ -31,16 +32,19 @@ export default function ModalContent() {
     }, [])
 
     return (
-        <div className="absolute top-0 left-0 w-screen h-screen flex text-center justify-center items-center p-5">
-                {
-                    popup === 'add' && <ExpenseForm />
-                }
-                {
-                    popup === 'edit' && <EditForm />
-                }
-                {
-                    popup === 'delete' && <DeleteConfirmation />
-                }
+        <div className="absolute top-0 left-0 w-screen h-screen bg-black/10 flex text-center justify-center items-center p-5 z-50">
+            {
+                popup === 'add' && <ExpenseForm />
+            }
+            {
+                popup === 'edit' && <EditForm />
+            }
+            {
+                popup === 'delete' && <DeleteConfirmation />
+            }
+            {
+                popup === 'logout' && <Logout />
+            }
         </div>
     );
 }

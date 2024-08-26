@@ -47,7 +47,6 @@ const EditForm = () => {
         try {
             const response = await fetch(`${host}/api/${id}`, {
                 method: "PATCH",
-                mode: "no-cors",
                 body: JSON.stringify(formData),
                 headers: {
                     'Content-Type': 'application/json',

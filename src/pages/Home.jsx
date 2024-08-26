@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import useAuthContext from "../hooks/useAuthContext";
 import useExpensesContext from '../hooks/useExpensesContext.js';
 import host from '../host.js';
-import useModalContext from '../hooks/useModalContext.js';
 import Portal from '../components/Portal';
 
 function Home() {

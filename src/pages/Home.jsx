@@ -12,7 +12,6 @@ function Home() {
     useEffect(() => {
         const getExpenses = async () => {
             const response = await fetch(`${host}/api/`, {
-                mode: 'no-cors',
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }

@@ -8,7 +8,6 @@ const useLogin = () => {
 
     const login = async (email, password) => {
         const response = await fetch(`${host}/api/user/login`, {
-            mode: "no-cors",
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -19,7 +19,6 @@ const EditForm = () => {
         const getExpense = async () => {
             try {
                 const response = await fetch(`${host}/api/${id}`, {
-                    mode: "no-cors",
                     headers: {
                         'Authorization': `Bearer ${user.token}`
                     }

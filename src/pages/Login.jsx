@@ -23,7 +23,7 @@ const Login = () => {
                         />
                     </div>
                     <form onSubmit={handleSubmit} className='flex-1 2xl:min-h-[calc(100vh-4rem)] flex flex-col w-full bg-dark px-12 2xl:w-2/3 space-y-5 items-center justify-center mx-auto p-5'>
-                        <h1 className='text-2xl font-bold text-lite'>Login to the Expenses App</h1>
+                        <h1 className='text-2xl font-bold text-white'>Login to the Expenses App</h1>
                         <input
                             type='email'
                             autoFocus

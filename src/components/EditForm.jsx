@@ -78,9 +78,12 @@ const EditForm = () => {
                 <input placeholder="amount" type="number" value={amount || ''} min={0}
                     onChange={(e) => setAmount(e.target.value)} required name="amount"
                 />
-                <button type="submit" className='btn'>
-                    EDIT EXPENSE
-                </button>
+                <div className="flex gap-2 justify-center">
+                    <button type="submit" className='btn'>
+                        EDIT EXPENSE
+                    </button>
+                    <button className="btn" onClick={() => setModalOpen(false)}>Cancel</button>
+                </div>
                 {error && <h2>{error}</h2>}
             </form>
         </div >

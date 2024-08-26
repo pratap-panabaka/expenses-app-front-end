@@ -13,6 +13,7 @@ const DeleteConfirmation = () => {
         const delExpense = async () => {
             const response = await fetch(`${host}/api/${id}`, {
                 method: "DELETE",
+                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${user.token}`

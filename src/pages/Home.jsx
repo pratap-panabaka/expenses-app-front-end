@@ -8,11 +8,11 @@ import Portal from '../components/Portal';
 function Home() {
     const { user } = useAuthContext();
     const { expenses, dispatch } = useExpensesContext();
-    const { setModalOpen } = useModalContext();
 
     useEffect(() => {
         const getExpenses = async () => {
             const response = await fetch(`${host}/api/`, {
+                mode: 'no-cors',
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }

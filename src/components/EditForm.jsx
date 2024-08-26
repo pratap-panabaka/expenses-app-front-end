@@ -19,6 +19,7 @@ const EditForm = () => {
         const getExpense = async () => {
             try {
                 const response = await fetch(`${host}/api/${id}`, {
+                    mode: "no-cors",
                     headers: {
                         'Authorization': `Bearer ${user.token}`
                     }
@@ -47,6 +48,7 @@ const EditForm = () => {
         try {
             const response = await fetch(`${host}/api/${id}`, {
                 method: "PATCH",
+                mode: "no-cors",
                 body: JSON.stringify(formData),
                 headers: {
                     'Content-Type': 'application/json',

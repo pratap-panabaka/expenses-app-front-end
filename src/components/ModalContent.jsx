@@ -23,13 +23,14 @@ export default function ModalContent() {
 
         return () => {
             document.body.removeEventListener('keydown', esc);
+
             document.body.style.overflow = 'unset';
             document.body.style['overflow-x'] = 'hidden';
             setPopup(null);
             setId(null);
             setModalOpen(false);
         }
-    }, [])
+    }, [modalOpen, setId, setModalOpen, setPopup])
 
     return (
         <div className="absolute top-0 left-0 w-screen h-screen bg-black/10 flex text-center justify-center items-center p-5 z-50">

@@ -3,12 +3,28 @@ import useAuthContext from "../hooks/useAuthContext";
 import useExpensesContext from '../hooks/useExpensesContext.js';
 import host from '../host.js';
 import Portal from '../components/Portal';
+import useModalContext from '../hooks/useModalContext.js';
 
 function Home() {
     const { user } = useAuthContext();
     const { expenses, dispatch } = useExpensesContext();
+    const { modalOpen, setModalOpen, setPopup } = useModalContext();
 
     useEffect(() => {
+
+        // bind backtick for opeing add form
+        const backtick = (e) => {
+            if (e.keyCode === 192) {
+                e.preventDefault();
+                setModalOpen(true);
+                setPopup('add');
+            }
+        }
+
+        if (!modalOpen) {
+            document.body.addEventListener('keydown', backtick);
+        }
+
         const getExpenses = async () => {
             const response = await fetch(`${host}/api/`, {
                 headers: {
@@ -21,7 +37,11 @@ function Home() {
         if (user) {
             getExpenses();
         }
-    }, [user, dispatch])
+
+        return () => {
+            document.body.removeEventListener('keydown', backtick);
+        }
+    }, [user, dispatch, modalOpen, setModalOpen, setPopup])
 
     return (
         <>

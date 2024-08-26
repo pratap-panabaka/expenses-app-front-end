@@ -32,7 +32,7 @@ const EditForm = () => {
         }
 
         getExpense();
-    }, [id])
+    }, [id, user.token])
 
     const editExpense = async (e) => {
         e.preventDefault();

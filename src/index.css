@@ -42,37 +42,52 @@
   }
 
   .btn {
-    @apply outline-none px-4 py-2 bg-toolite text-toodark hover:bg-lite hover:text-dark font-bold
+    @apply text-white w-fit mx-auto px-5 py-2 font-bold bg-toodark focus:ring-4 focus:ring-white
   }
 
-  thead th {
-    border-collapse: separate;
-    background-color: tomato;
-    border: 1px solid;
-    border-top: none;
-    z-index: 1;
-    position: sticky;
-    top: 4rem;
+  .action-btn {
+    @apply p-2
+  }
+
+  table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+
+  table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-size: 18px;
+  }
+  
+  th,
+  td {
+    border: 1px solid black;
+    padding: 12px 15px;
   }
 
   td {
-    border: 1px solid;
-    height: 24px;
-    padding: 5px;
-    text-align: center;
-  }
-
-  td + td + td {
-    text-align: right;
+    font-size: 16px;
     font-weight: bold;
   }
 
-  tr:nth-child(odd) {
-    background-color: #eee;
+  td+td+td {
+    text-align: right;
+    font-weight: bold;
+    font-size: 18px
   }
 
-  tr:nth-child(even) {
-    background-color: aqua;
+  tbody tr:nth-of-type(odd) {
+    background-color: #f3f3f3;
+  }
+
+  tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
   }
 
   body {

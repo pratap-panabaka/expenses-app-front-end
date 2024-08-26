@@ -69,7 +69,7 @@ const EditForm = () => {
 
     return (
         <div className="max-width z-50">
-            <form className="flex flex-col gap-5 p-5 bg-lite w-full border-4" onSubmit={editExpense}>
+            < form className="flex flex-col gap-5 p-5 bg-lite w-full border-4" onSubmit={editExpense}>
                 <input placeholder="description" type="text" value={description || ''}
                     onChange={(e) => setDescription(e.target.value)} required name="desc"
                     autoComplete="off"
@@ -78,12 +78,12 @@ const EditForm = () => {
                 <input placeholder="amount" type="number" value={amount || ''} min={0}
                     onChange={(e) => setAmount(e.target.value)} required name="amount"
                 />
-                <button type="submit" className='p-2 font-bold w-fit mx-auto text-white bg-toodark hover:text-toolite focus:ring-4'>
+                <button type="submit" className='btn'>
                     EDIT EXPENSE
                 </button>
                 {error && <h2>{error}</h2>}
             </form>
-        </div>
+        </div >
     )
 }
 

@@ -41,7 +41,7 @@ function Home() {
         return () => {
             document.body.removeEventListener('keydown', backtick);
         }
-    }, [user, dispatch, modalOpen, setModalOpen, setPopup])
+    }, [user, dispatch, modalOpen, setModalOpen, setPopup]);
 
     return (
         <>

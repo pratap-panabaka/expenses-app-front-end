@@ -33,8 +33,8 @@ const DeleteConfirmation = () => {
         <div className="bg-lite z-50 p-5 border-4">
             <h1 className="font-bold text-white text-xl p-5">Are you sure to Delete?</h1>
             <div className="flex gap-2 justify-center">
-                <button className="btn focus:ring-4 focus:ring-toodark" onClick={onDel} autoFocus>Delete</button>
-                <button className="btn focus:ring-4 focus:ring-toodark" onClick={() => setModalOpen(false)}>No</button>
+                <button className="btn" onClick={onDel} autoFocus>Delete</button>
+                <button className="btn" onClick={() => setModalOpen(false)}>No</button>
             </div>
         </div>
     )

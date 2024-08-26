@@ -57,7 +57,7 @@ const ExpenseForm = () => {
                 <input placeholder="amount" type="number" value={amount || ''} min={0}
                     onChange={(e) => setAmount(e.target.value)} required name="amount"
                 />
-                <button type="submit" className='p-2 font-bold w-fit mx-auto text-white bg-toodark hover:text-toolite focus:ring-4'>
+                <button type="submit" className='btn'>
                     ADD EXPENSE
                 </button>
                 {error && <h2>{error}</h2>}

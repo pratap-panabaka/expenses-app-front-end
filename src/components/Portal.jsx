@@ -1,21 +1,24 @@
 import { createPortal } from 'react-dom';
 import ModalContent from './ModalContent';
 import useModalContext from '../hooks/useModalContext';
+import { RiEditLine } from "react-icons/ri";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { RiLogoutBoxRLine } from "react-icons/ri";
 
-export default function Portal({action, id}) {
+export default function Portal({ action, id }) {
     const { modalOpen, setModalOpen, setPopup, setId } = useModalContext();
 
     const onClick = (e) => {
         setModalOpen(true);
         setPopup(action);
-        setId(e.target.id);
+        setId(e.target.id || e.currentTarget.id);
     }
 
     let buttonTitle;
 
     switch (action) {
         case 'logout': {
-            buttonTitle = 'Logout';
+            buttonTitle = <RiLogoutBoxRLine fontSize={24} />;
             break;
         }
 
@@ -25,19 +28,19 @@ export default function Portal({action, id}) {
         }
 
         case 'edit': {
-            buttonTitle = 'Edit';
+            buttonTitle = <RiEditLine />;
             break;
         }
 
         case 'delete': {
-            buttonTitle = 'Delete';
+            buttonTitle = <RiDeleteBin5Line />;
             break;
         }
     }
 
     return (
         <>
-            <button className="w-fit mx-auto bg-toodark text-white font-bold border-rounded-large px-5 py-1" id={id} onClick={onClick}>{buttonTitle}</button>
+            <button id={id} onClick={onClick} className={action === 'add' ? 'btn' : 'action-btn'}>{buttonTitle}</button>
             {modalOpen && createPortal(
                 <ModalContent />,
                 document.body

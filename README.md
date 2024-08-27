@@ -1,6 +1,4 @@
-# React + Vite + TailwindCSS Template
+# Expenses App
+## Single Page App to add your daily expenses.
 
-Example:
-```
-gh repo create myrepo_name --template https://github.com/PRATAP-KUMAR/pratap-panabaka-react-vite-tailwind-template --private  --clone
-```
+Link to [Backend](https://github.com/PRATAP-KUMAR/expenses-app-back-end)

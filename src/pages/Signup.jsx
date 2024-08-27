@@ -41,11 +41,11 @@ const Signup = () => {
                             className='w-full h-12 pl-2 focus:ring-1 focus:ring-toodark caret-toodark placeholder-dark'
                             required
                         />
-                        <button className='btn bg-lite text-toodark hover:bg-blue-500 hover:text-white focus:bg-blue-500'>
+                        <button className='btn'>
                             Signup
                         </button>
                         {
-                            error && (<h1 className='text-red-500 font-bold'>{error}</h1>)
+                            error && (<h1 className='text-white font-bold'>{error}</h1>)
                         }
                     </form>
                 </div >

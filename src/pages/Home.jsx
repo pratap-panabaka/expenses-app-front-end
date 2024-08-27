@@ -82,7 +82,7 @@ function Home() {
                                     expenses.data.map((expense, idx) =>
                                     (
                                         <tr key={expense.id}>
-                                            <td colSpan={1}>{idx + 1}</td>
+                                            <td colSpan={1} align='center'>{idx + 1}</td>
                                             <td colSpan={7}>{expense.description}</td>
                                             <td colSpan={2}>{expense.amount}</td>
                                             <td colSpan={1} className='text-center'>

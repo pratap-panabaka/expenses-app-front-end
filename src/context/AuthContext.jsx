@@ -3,11 +3,8 @@ import authReducer from "../reducers/authReducer";
 
 const AuthContext = createContext(null);
 
-const AuthContextProvider = (props) => {
+const AuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, { user: null });
-
-    const obj = props;
-    const {children} = obj;
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
@@ -24,4 +21,4 @@ const AuthContextProvider = (props) => {
     )
 }
 
-export {AuthContext, AuthContextProvider}
+export { AuthContext, AuthContextProvider }

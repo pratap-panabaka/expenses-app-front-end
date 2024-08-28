@@ -36,11 +36,26 @@ export default function Portal({ action, id }) {
             buttonTitle = <RiDeleteBin5Line />;
             break;
         }
+
+        case 'add-contact': {
+            buttonTitle = 'Add Contact';
+            break;
+        }
+
+        case 'edit-contact': {
+            buttonTitle = <RiEditLine />;
+            break;
+        }
+
+        case 'delete-contact': {
+            buttonTitle = <RiDeleteBin5Line />;
+            break;
+        }
     }
 
     return (
         <>
-            <button id={id} onClick={onClick} className={action === 'add' ? 'btn' : 'action-btn'}>{buttonTitle}</button>
+            <button id={id} onClick={onClick} className={action === 'add' || action === 'add-contact' ? 'btn' : 'action-btn'}>{buttonTitle}</button>
             {modalOpen && createPortal(
                 <ModalContent />,
                 document.body

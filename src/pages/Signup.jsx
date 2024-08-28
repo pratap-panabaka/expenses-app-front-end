@@ -17,7 +17,7 @@ const Signup = () => {
                 <div className="flex flex-col min-h-[calc(100vh-4rem)] items-center justify-start 2xl:flex-row">
                     <div className='flex flex-col items-center justify-center 2xl:w-1/3'>
                         <img
-                            className="w-96 bg-lite p-10"
+                            className="w-96 p-10"
                             src="/login-svgrepo-com.svg"
                             alt="Login Photo"
                         />
@@ -45,7 +45,9 @@ const Signup = () => {
                             Signup
                         </button>
                         {
-                            error && (<h1 className='text-white font-bold'>{error}</h1>)
+                            error && (
+                                <p className='text-white font-bold'>{error}</p>
+                            )
                         }
                     </form>
                 </div >

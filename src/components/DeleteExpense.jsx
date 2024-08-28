@@ -1,26 +1,22 @@
 import useAuthContext from "../hooks/useAuthContext";
-import useExpensesContext from "../hooks/useExpensesContext";
 import useModalContext from "../hooks/useModalContext";
 import host from "../host";
 
-const DeleteConfirmation = () => {
+const DeleteExpense = () => {
 
     const { user } = useAuthContext();
-    const { dispatch } = useExpensesContext();
     const { setModalOpen, id } = useModalContext();
 
     const onDel = () => {
         const delExpense = async () => {
-            const response = await fetch(`${host}/api/${id}`, {
+            const response = await fetch(`${host}/api/expenses/${id}`, {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${user.token}`
                 }
             });
-            const json = await response.json();
             if (response.ok) {
-                dispatch({ type: 'DEL_EXPENSE', payload: { id, sum: json.sum } });
                 setModalOpen(false);
             }
         }
@@ -40,4 +36,4 @@ const DeleteConfirmation = () => {
     )
 }
 
-export default DeleteConfirmation;
+export default DeleteExpense;

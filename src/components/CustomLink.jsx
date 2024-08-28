@@ -7,7 +7,7 @@ const CustomLink = (props) => {
     const isActive = useMatch({ path: useResolvedPath(to).pathname, end: true });
 
     return (
-        <Link className={isActive ? 'btn text-active' : 'btn'} to={to}>{routeName}</Link>
+        <Link className={isActive ? 'btn bg-teal-500 ring-2 ring-white' : 'btn'} to={to}>{routeName}</Link>
     );
 };
 

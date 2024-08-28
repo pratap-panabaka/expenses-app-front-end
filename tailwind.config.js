@@ -19,7 +19,7 @@ export default {
         lite: "#c06352",
         dark: "#f96f5d",
         toodark: "#43281c",
-        active: "#FA824C"
+        active: "white"
       },
       fontFamily: {
         sans: ['"palanquin-dark"', "sans-serif"],

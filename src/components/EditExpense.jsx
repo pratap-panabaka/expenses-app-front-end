@@ -77,7 +77,7 @@ const EditExpense = () => {
                 />
                 <div className="flex gap-2 justify-center">
                     <button type="submit" className='btn'>
-                        EDIT EXPENSE
+                        Save Edits
                     </button>
                     <button className="btn" onClick={() => setModalOpen(false)}>Cancel</button>
                 </div>

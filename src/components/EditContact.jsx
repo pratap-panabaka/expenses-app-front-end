@@ -77,7 +77,7 @@ const EditContact = () => {
                 />
                 <div className="flex gap-2 justify-center">
                     <button type="submit" className='btn'>
-                        EDIT CONTACT
+                        Save Edits
                     </button>
                     <button className="btn" onClick={() => setModalOpen(false)}>Cancel</button>
                 </div>

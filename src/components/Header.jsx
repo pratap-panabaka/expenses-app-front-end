@@ -13,10 +13,10 @@ function Header() {
                 }
 
                 {user && (
-                    <>
+                    <div className="flex gap-2">
                         <CustomLink to="/expenses" routeName="Expenses" />
                         <CustomLink to="/contacts" routeName="Contacts" />
-                    </>
+                    </div>
                 )
                 }
 

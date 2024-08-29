@@ -53,8 +53,8 @@ function Expenses() {
         <>
             <div className="bg-toolite grid grid-cols-6">
                 <div></div>
-                <div className='min-height bg-[#009879] overflow-x-hidden col-span-4'>
-                    <div className='grid grid-cols-3 bg-dark items-center justify-center'>
+                <div className='min-height bg-dark overflow-x-hidden col-span-4'>
+                    <div className='grid grid-cols-3 items-center justify-center'>
                         <p>{ }</p>
                         <h1 className='text-center text-white font-bold text-xl p-4'>Expenses List</h1>
                         <Portal action={"add"} />

@@ -15,11 +15,10 @@ export default {
     },
     extend: {
       colors: {
-        toolite: "#FBF2c0",
-        lite: "#c06352",
-        dark: "#f96f5d",
-        toodark: "#43281c",
-        active: "white"
+        toolite: "#97FEED",
+        lite: "#35A29F",
+        dark: "#0B666A",
+        toodark: "#071952",
       },
       fontFamily: {
         sans: ['"palanquin-dark"', "sans-serif"],

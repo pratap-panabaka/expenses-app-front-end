@@ -48,12 +48,12 @@ const ExpenseForm = () => {
     return (
         <div className="max-width z-50">
             <form className="flex flex-col gap-5 p-5 bg-lite w-full border-4" onSubmit={addExpense}>
-                <input placeholder="description" type="text" value={description || ''}
+                <input placeholder="Description" type="text" value={description || ''}
                     onChange={(e) => setDescription(e.target.value)} required name="desc"
                     autoComplete="off"
                     autoFocus
                 />
-                <input placeholder="amount" type="number" value={amount || ''} min={0}
+                <input placeholder="Amount" type="number" value={amount || ''} min={0}
                     onChange={(e) => setAmount(e.target.value)} required name="amount"
                 />
                 <div className="flex gap-2 justify-center">

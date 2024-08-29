@@ -41,20 +41,20 @@
     @apply min-h-[calc(100vh-64px)] items-center justify-center flex flex-col
   }
 
+  .link {
+    @apply text-toodark w-fit mx-auto px-5 py-2 font-bold bg-toolite flex items-center
+  }
+
   .btn {
-    @apply text-white w-fit mx-auto px-5 py-2 font-bold bg-green-900 focus:outline-none focus:ring-2 focus:ring-blue-500
+    @apply text-white w-fit mx-auto px-5 py-2 font-bold bg-toodark
+  }
+
+  * {
+    @apply focus:outline-none focus:ring-2 focus:ring-teal-500
   }
 
   .action-btn {
     @apply p-2
-  }
-
-  table {
-    border-collapse: collapse;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   }
 
   table thead tr {

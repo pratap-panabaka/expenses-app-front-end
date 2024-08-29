@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 import ModalContent from './ModalContent';
-import useModalContext from '../hooks/useModalContext';
+import { useModalContext } from '../hooks/useModalContext';
 import { RiEditLine } from "react-icons/ri";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { RiLogoutBoxRLine } from "react-icons/ri";

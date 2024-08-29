@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useModalContext } from "../hooks/useModalContext";
 import host from "../host";
-import useAuthContext from "../hooks/useAuthContext";
-import useModalContext from "../hooks/useModalContext";
 
 const ExpenseForm = () => {
 
@@ -31,7 +31,7 @@ const ExpenseForm = () => {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
-            if(response.ok) {
+            if (response.ok) {
                 console.log('response OK')
             }
         } catch (error) {
@@ -60,7 +60,7 @@ const ExpenseForm = () => {
                     <button type="submit" className='btn'>
                         Add Expense
                     </button>
-                    <button className="btn" onClick={() => setModalOpen(false)}>Cancel</button>
+                    <button type="button" className="btn" onClick={() => setModalOpen(false)}>Cancel</button>
                 </div>
                 {error && <h2>{error}</h2>}
             </form>

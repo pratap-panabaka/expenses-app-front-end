@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useModalContext from "../hooks/useModalContext";
+import {useModalContext} from "../hooks/useModalContext";
 import EditExpense from "./EditExpense";
 import AddExpense from "./AddExpense";
 import Logout from "./Logout";

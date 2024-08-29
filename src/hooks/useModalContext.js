@@ -11,4 +11,4 @@ const useModalContext = () => {
     return context;
 }
 
-export default useModalContext;
+export {useModalContext};

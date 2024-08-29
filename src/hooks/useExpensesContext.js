@@ -11,4 +11,4 @@ const useExpensesContext = () => {
     return context;
 }
 
-export default useExpensesContext;
+export {useExpensesContext};

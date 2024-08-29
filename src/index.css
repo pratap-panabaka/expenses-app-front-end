@@ -42,11 +42,11 @@
   }
 
   .link {
-    @apply text-toodark w-fit mx-auto px-5 py-2 font-bold bg-toolite flex items-center
+    @apply text-toodark w-fit mx-auto px-4 py-1 font-bold bg-toolite flex items-center
   }
 
   .btn {
-    @apply text-white w-fit mx-auto px-5 py-2 font-bold bg-toodark
+    @apply text-white w-fit mx-auto px-4 py-2 font-bold bg-toodark
   }
 
   button,
@@ -54,7 +54,8 @@
     @apply focus:outline-none focus:ring-4 focus:ring-teal-500
   }
 
-  form button {
+  form button,
+  div > button {
     @apply focus:ring-white
   }
 

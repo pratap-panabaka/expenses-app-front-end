@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useModalContext } from "../hooks/useModalContext";
 import host from "../host";
-import useAuthContext from "../hooks/useAuthContext";
-import useModalContext from "../hooks/useModalContext";
 
 const EditContact = () => {
 
@@ -79,7 +79,7 @@ const EditContact = () => {
                     <button type="submit" className='btn'>
                         Save Edits
                     </button>
-                    <button className="btn" onClick={() => setModalOpen(false)}>Cancel</button>
+                    <button type="button" className="btn" onClick={() => setModalOpen(false)}>Cancel</button>
                 </div>
                 {error && <h2>{error}</h2>}
             </form>

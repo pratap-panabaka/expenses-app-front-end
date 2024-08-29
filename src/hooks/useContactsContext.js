@@ -11,4 +11,4 @@ const useContactsContext = () => {
     return context;
 }
 
-export default useContactsContext;
+export {useContactsContext};

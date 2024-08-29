@@ -1,5 +1,5 @@
 import { useLogout } from "../hooks/useLogout";
-import useModalContext from "../hooks/useModalContext";
+import { useModalContext } from "../hooks/useModalContext";
 
 const Logout = () => {
 

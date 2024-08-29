@@ -1,7 +1,7 @@
 import { useState } from "react";
 import host from "../host";
-import useAuthContext from "../hooks/useAuthContext";
-import useModalContext from "../hooks/useModalContext";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useModalContext } from "../hooks/useModalContext";
 
 const AddContact = () => {
 
@@ -62,7 +62,7 @@ const AddContact = () => {
                     <button type="submit" className='btn'>
                         Add Contact
                     </button>
-                    <button className="btn" onClick={() => setModalOpen(false)}>Cancel</button>
+                    <button type="button" className="btn" onClick={() => setModalOpen(false)}>Cancel</button>
                 </div>
                 {error && <h2>{error}</h2>}
             </form>

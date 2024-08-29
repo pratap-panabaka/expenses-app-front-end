@@ -1,4 +1,4 @@
-import useAuthContext from "../hooks/useAuthContext.js";
+import { useAuthContext } from "../hooks/useAuthContext.js";
 import CustomLink from "./CustomLink";
 import Portal from "./Portal";
 
@@ -26,7 +26,7 @@ function Header() {
                         <Portal action={"logout"} />
                     </div>
                 )}
-                
+
                 {!user && (
                     <div className="text-white flex flex-row space-x-5">
                         <CustomLink to="/login" routeName="Login" />

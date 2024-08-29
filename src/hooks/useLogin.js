@@ -1,6 +1,6 @@
 import { useState } from "react";
+import {useAuthContext} from "./useAuthContext.js";
 import host from "../host.js";
-import useAuthContext from "./useAuthContext.js";
 
 const useLogin = () => {
     const [error, setError] = useState(null);

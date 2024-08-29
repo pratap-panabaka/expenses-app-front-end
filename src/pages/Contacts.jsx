@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import useAuthContext from "../hooks/useAuthContext";
-import host from '../host.js';
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useModalContext } from '../hooks/useModalContext.js';
 import Portal from '../components/Portal';
-import useModalContext from '../hooks/useModalContext.js';
+import host from '../host.js';
 
 function Contacts() {
     const { user } = useAuthContext();

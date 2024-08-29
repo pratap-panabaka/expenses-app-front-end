@@ -1,5 +1,5 @@
-import useAuthContext from "../hooks/useAuthContext";
-import useModalContext from "../hooks/useModalContext";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useModalContext } from "../hooks/useModalContext";
 import host from "../host";
 
 const DeleteExpense = () => {
@@ -26,13 +26,13 @@ const DeleteExpense = () => {
     }
 
     return (
-        <form className="bg-lite z-50 p-5 border-4 boder-toodark">
+        <div className="bg-lite z-50 p-5 border-4 boder-toodark">
             <h1 className="font-bold text-white text-xl p-5">Are you sure to Delete?</h1>
             <div className="flex gap-2 justify-center">
                 <button className="btn" onClick={onDel} autoFocus>Delete</button>
                 <button className="btn" onClick={() => setModalOpen(false)}>No</button>
             </div>
-        </form>
+        </div>
     )
 }
 

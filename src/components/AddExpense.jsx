@@ -47,7 +47,7 @@ const ExpenseForm = () => {
 
     return (
         <div className="max-width z-50">
-            <form className="flex flex-col gap-5 p-5 bg-lite w-full border-4" onSubmit={addExpense}>
+            <form className="flex flex-col gap-5 p-5 bg-lite w-full border-4 border-toodark" onSubmit={addExpense}>
                 <input placeholder="Description" type="text" value={description || ''}
                     onChange={(e) => setDescription(e.target.value)} required name="desc"
                     autoComplete="off"

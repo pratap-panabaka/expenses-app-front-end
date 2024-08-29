@@ -66,7 +66,7 @@ const EditExpense = () => {
 
     return (
         <div className="max-width z-50">
-            < form className="flex flex-col gap-5 p-5 bg-lite w-full border-4" onSubmit={editExpense}>
+            < form className="flex flex-col gap-5 p-5 bg-lite w-full border-4 border-toodark" onSubmit={editExpense}>
                 <input placeholder="description" type="text" value={description || ''}
                     onChange={(e) => setDescription(e.target.value)} required name="desc"
                     autoComplete="off"

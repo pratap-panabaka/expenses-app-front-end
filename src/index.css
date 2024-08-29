@@ -49,8 +49,13 @@
     @apply text-white w-fit mx-auto px-5 py-2 font-bold bg-toodark
   }
 
-  button {
-    @apply focus:outline-none focus:ring-2 focus:ring-teal-500
+  button,
+  .link {
+    @apply focus:outline-none focus:ring-4 focus:ring-teal-500
+  }
+
+  form button {
+    @apply focus:ring-white
   }
 
   .action-btn {

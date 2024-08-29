@@ -64,7 +64,7 @@ const EditContact = () => {
 
     return (
         <div className="max-width z-50">
-            < form className="flex flex-col gap-5 p-5 bg-lite w-full border-4" onSubmit={editContact}>
+            < form className="flex flex-col gap-5 p-5 bg-lite w-full border-4 border-toodark" onSubmit={editContact}>
                 <input placeholder="Name" type="text" value={name || ''}
                     onChange={(e) => setName(e.target.value)} required name="name"
                     autoComplete="off"

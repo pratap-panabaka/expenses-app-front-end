@@ -11,6 +11,11 @@ function Expenses() {
     const [expenses, setExpenses] = useState(null);
     const [showError, setShowError] = useState(null);
 
+    const formatDate = (timestamp) => {
+        const options = { month: 'short', day: '2-digit' };
+        return new Date(timestamp).toLocaleDateString('en-US', options);
+    }
+
     useEffect(() => {
 
         // bind backtick for opeing add form
@@ -34,7 +39,6 @@ function Expenses() {
                     }
                 });
                 const json = await response.json(); // expect array of objects
-                console.log(json);
                 setExpenses(json);
             } catch (error) {
                 setShowError(true);
@@ -72,7 +76,8 @@ function Expenses() {
                             <thead>
                                 <tr>
                                     <th colSpan={1}>S.No</th>
-                                    <th colSpan={7}>Description</th>
+                                    <th colSpan={2}>Date</th>
+                                    <th colSpan={5}>Description</th>
                                     <th colSpan={2}>Amount</th>
                                     <th colSpan={2} >Actions</th>
                                 </tr>
@@ -83,7 +88,8 @@ function Expenses() {
                                     (
                                         <tr key={expense.id}>
                                             <td colSpan={1} align='center'>{idx + 1}</td>
-                                            <td colSpan={7}>{expense.description}</td>
+                                            <td colSpan={2} align='center'>{formatDate(expense.created_at)}</td>
+                                            <td colSpan={5}>{expense.description}</td>
                                             <td colSpan={2} align='right'>{expense.amount}</td>
                                             <td colSpan={1} className='text-center'>
                                                 <Portal id={expense.id} action={"edit"} />

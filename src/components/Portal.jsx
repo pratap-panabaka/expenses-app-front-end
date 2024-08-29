@@ -23,7 +23,7 @@ export default function Portal({ action, id }) {
         }
 
         case 'add': {
-            buttonTitle = 'Add';
+            buttonTitle = 'Add a Expense';
             break;
         }
 
@@ -38,7 +38,7 @@ export default function Portal({ action, id }) {
         }
 
         case 'add-contact': {
-            buttonTitle = 'Add Contact';
+            buttonTitle = 'Add a Contact';
             break;
         }
 

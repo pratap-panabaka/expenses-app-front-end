@@ -18,6 +18,9 @@ const Home = () => {
                     <a className="px-4 py-2 text-left hover:text-toolite" href="https://github.com/PRATAP-KUMAR/expenses-app-back-end" target="_blank" rel="noreferrer">Backend</a>
                 </div>
             </div>
+            <video controls width="576">
+                <source src="demo.webm" type="video/webm" />
+            </video>
         </div>
     )
 }

@@ -4,12 +4,13 @@ import { useModalContext } from '../hooks/useModalContext.js';
 import host from '../host.js';
 import Portal from '../components/Portal.jsx';
 import intToWords from '../utils/intToWords.js';
+import { useExpensesContext } from '../hooks/useExpensesContext.js';
 
 function Expenses() {
     const { user } = useAuthContext();
-    const { modalOpen, setModalOpen, setPopup } = useModalContext();
+    const { setPopup } = useModalContext();
+    const { expenses, dispatch } = useExpensesContext();
 
-    const [expenses, setExpenses] = useState(null);
     const [showError, setShowError] = useState(null);
 
     const formatDate = (timestamp) => {
@@ -19,21 +20,6 @@ function Expenses() {
 
     useEffect(() => {
 
-        // bind backtick for opeing add form
-        const backtick = (e) => {
-            if (e.keyCode === 192) {
-                e.preventDefault();
-                setModalOpen(true);
-                setPopup('add');
-            }
-        }
-
-        console.log('I am from expenses page');
-
-        if (!modalOpen) {
-            document.body.addEventListener('keydown', backtick);
-        }
-
         const getExpenses = async () => {
             try {
                 const response = await fetch(`${host}/api/expenses`, {
@@ -42,7 +28,7 @@ function Expenses() {
                     }
                 });
                 const json = await response.json(); // expect array of objects
-                setExpenses(json);
+                dispatch({ type: "GET_EXPENSES", payload: json });
             } catch (error) {
                 setShowError(true);
             }
@@ -50,11 +36,7 @@ function Expenses() {
         if (user) {
             getExpenses();
         }
-
-        return () => {
-            document.body.removeEventListener('keydown', backtick);
-        }
-    }, [user, modalOpen, setModalOpen, setPopup]);
+    }, [user, setPopup, dispatch]);
 
     return (
         <>
@@ -75,14 +57,14 @@ function Expenses() {
                     }
                     {
                         expenses &&
-                        <table className='table-fixed w-full'>
+                        <table className='table-auto w-full'>
                             <thead>
                                 <tr>
-                                    <th colSpan={1}>S.No</th>
-                                    <th colSpan={2}>Date</th>
-                                    <th colSpan={5}>Description</th>
-                                    <th colSpan={2}>Amount</th>
-                                    <th colSpan={2} >Actions</th>
+                                    <th>S.No</th>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th colSpan={2}>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -90,14 +72,14 @@ function Expenses() {
                                     expenses.data.map((expense, idx) =>
                                     (
                                         <tr key={expense.id}>
-                                            <td colSpan={1} align='center'>{idx + 1}</td>
-                                            <td colSpan={2} align='center'>{formatDate(expense.created_at)}</td>
-                                            <td colSpan={5}>{expense.description}</td>
-                                            <td colSpan={2} align='right'>{expense.amount}</td>
-                                            <td colSpan={1} className='text-center'>
+                                            <td align='center'>{idx + 1}</td>
+                                            <td align='center'>{formatDate(expense.created_at)}</td>
+                                            <td align='center'>{expense.description}</td>
+                                            <td align='right'>{expense.amount}</td>
+                                            <td align='center'>
                                                 <Portal id={expense.id} action={"edit"} />
                                             </td>
-                                            <td colSpan={1} className='text-center'>
+                                            <td align='center'>
                                                 <Portal id={expense.id} action={"delete"} />
                                             </td>
                                         </tr>
@@ -106,13 +88,13 @@ function Expenses() {
                                 {
                                     expenses.sum &&
                                     <tr>
-                                        <td colSpan={8} align='center'>
+                                        <td align='center' colSpan={3}>
                                             <h3 className='text-toodark font-bold text-xl'>
                                                 TOTAL
                                                 <span className='text-toodark text-xl'> ({intToWords(expenses.sum)})</span>
                                             </h3>
                                         </td>
-                                        <td colSpan={2} className='font-bold text-2xl text-toodark text-right'>
+                                        <td className='font-bold text-2xl text-toodark text-right'>
                                             {expenses.sum}
                                         </td>
                                         <td colSpan={2}>{ }</td>

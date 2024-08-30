@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useModalContext } from "../hooks/useModalContext";
-import host from "../host";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useModalContext } from "../../hooks/useModalContext";
+import host from "../../host";
+import { useExpensesContext } from "../../hooks/useExpensesContext";
 
-const EditExpense = () => {
+const EditExpense = ({ onClose }) => {
 
     const { user } = useAuthContext();
-    const { setModalOpen, id } = useModalContext();
+    const { id } = useModalContext();
+    const { dispatch } = useExpensesContext();
 
     const [description, setDescription] = useState(undefined);
     const [amount, setAmount] = useState(undefined);
     const [error, setError] = useState(undefined);
 
     useEffect(() => {
-
         const getExpense = async () => {
             try {
                 const response = await fetch(`${host}/api/expenses/${id}`, {
@@ -51,17 +52,19 @@ const EditExpense = () => {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
+
+            const json = await response.json();
+
             if (response.ok) {
-                console.log('response OK');
+                setDescription('');
+                setAmount('');
+                setError('');
+                onClose();
+                dispatch({ type: "UPDATE_EXPENSE", payload: json })
             }
         } catch (error) {
             console.log(error);
         }
-
-        setDescription('');
-        setAmount('');
-        setError('');
-        setModalOpen(false);
     }
 
     return (
@@ -79,7 +82,7 @@ const EditExpense = () => {
                     <button type="submit" className='btn'>
                         Save Edits
                     </button>
-                    <button type="button" className="btn" onClick={() => setModalOpen(false)}>Cancel</button>
+                    <button type="button" className="btn" onClick={onClose}>Cancel</button>
                 </div>
                 {error && <h2>{error}</h2>}
             </form>

@@ -1,12 +1,12 @@
 import { useState } from "react";
-import host from "../host";
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useModalContext } from "../hooks/useModalContext";
+import host from "../../host";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useContactsContext } from "../../hooks/useContactsContext";
 
-const AddContact = () => {
+const AddContact = ({ onClose }) => {
 
     const { user } = useAuthContext();
-    const { setModalOpen } = useModalContext();
+    const {dispatch} = useContactsContext();
 
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -31,6 +31,13 @@ const AddContact = () => {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
+
+            const json = await response.json();
+            dispatch({
+                type: "ADD_CONTACT",
+                payload: json
+            });
+
             if (response.ok) {
                 console.log('response OK')
             }
@@ -42,7 +49,7 @@ const AddContact = () => {
         setPhone('');
         setError('');
         e.target.reset();
-        setModalOpen(false);
+        onClose();
     }
 
     return (
@@ -53,16 +60,17 @@ const AddContact = () => {
                     autoComplete="off"
                     autoFocus
                 />
-                <input placeholder="Phone" type="tel"
+                <input placeholder="Phone - Min length 3" type="tel"
                     pattern="(?=.{3,20}$)((\+)?(\d)((?:-|\s)?(\d))+)"
                     value={phone || ''}
                     onChange={(e) => setPhone(e.target.value)} required name="phone"
+                    autoComplete="off"
                 />
                 <div className="flex gap-2 justify-center">
                     <button type="submit" className='btn'>
                         Add Contact
                     </button>
-                    <button type="button" className="btn" onClick={() => setModalOpen(false)}>Cancel</button>
+                    <button type="button" className="btn" onClick={onClose}>Cancel</button>
                 </div>
                 {error && <h2>{error}</h2>}
             </form>

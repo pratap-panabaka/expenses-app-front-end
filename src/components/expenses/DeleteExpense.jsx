@@ -1,11 +1,13 @@
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useModalContext } from "../hooks/useModalContext";
-import host from "../host";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useExpensesContext } from "../../hooks/useExpensesContext";
+import { useModalContext } from "../../hooks/useModalContext";
+import host from "../../host";
 
-const DeleteExpense = () => {
+const DeleteExpense = ({ onClose }) => {
 
     const { user } = useAuthContext();
-    const { setModalOpen, id } = useModalContext();
+    const { id } = useModalContext();
+    const { dispatch } = useExpensesContext();
 
     const onDel = () => {
         const delExpense = async () => {
@@ -16,8 +18,11 @@ const DeleteExpense = () => {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
+
+            const json = await response.json();
             if (response.ok) {
-                setModalOpen(false);
+                onClose();
+                dispatch({ type: "DELETE_EXPENSE", payload: json })
             }
         }
         if (user) {
@@ -30,7 +35,7 @@ const DeleteExpense = () => {
             <h1 className="font-bold text-xl p-5">Are you sure to Delete?</h1>
             <div className="flex gap-2 justify-center">
                 <button className="btn" onClick={onDel} autoFocus>Delete</button>
-                <button className="btn" onClick={() => setModalOpen(false)}>No</button>
+                <button className="btn" onClick={onClose}>No</button>
             </div>
         </div>
     )

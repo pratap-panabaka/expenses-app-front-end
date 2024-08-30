@@ -1,31 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useModalContext } from '../hooks/useModalContext.js';
+import { useContactsContext } from '../hooks/useContactsContext.js';
 import Portal from '../components/Portal';
 import host from '../host.js';
 
 function Contacts() {
     const { user } = useAuthContext();
-    const [contacts, setContacts] = useState(null);
-    const { modalOpen, setModalOpen, setPopup } = useModalContext();
+    const { setPopup } = useModalContext();
+    const {contacts, dispatch} = useContactsContext();
     const [showError, setShowError] = useState(null);
 
     useEffect(() => {
-
-        // bind backtick for opeing add form
-        const backtick = (e) => {
-            if (e.keyCode === 192) {
-                e.preventDefault();
-                setModalOpen(true);
-                setPopup('add-contact');
-            }
-        }
-
-        console.log('I am from contacts page');
-
-        if (!modalOpen) {
-            document.body.addEventListener('keydown', backtick);
-        }
 
         const getContacts = async () => {
             try {
@@ -35,7 +21,7 @@ function Contacts() {
                     }
                 });
                 const json = await response.json(); // expect array of objects
-                setContacts(json);
+                dispatch({type: "GET_CONTACTS", payload: json})
             } catch (error) {
                 setShowError(true);
             }
@@ -44,10 +30,7 @@ function Contacts() {
             getContacts();
         }
 
-        return () => {
-            document.body.removeEventListener('keydown', backtick);
-        }
-    }, [user, modalOpen, setModalOpen, setPopup]);
+    }, [user, setPopup, dispatch]);
 
     return (
         <>
@@ -68,7 +51,7 @@ function Contacts() {
                     }
                     {
                         contacts && (
-                            <table className='table-fixed w-full'>
+                            <table className='table-auto w-full'>
                                 <thead>
                                     <tr>
                                         <th colSpan={1}>S.No</th>

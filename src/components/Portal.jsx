@@ -4,12 +4,15 @@ import { useModalContext } from '../hooks/useModalContext';
 import { RiEditLine } from "react-icons/ri";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import { useState } from 'react';
 
 export default function Portal({ action, id }) {
-    const { modalOpen, setModalOpen, setPopup, setId } = useModalContext();
+    const { setPopup, setId } = useModalContext();
+
+    const [showModal, setShowModal] = useState(false);
 
     const onClick = (e) => {
-        setModalOpen(true);
+        setShowModal(true);
         setPopup(action);
         setId(e.target.id || e.currentTarget.id);
     }
@@ -56,8 +59,8 @@ export default function Portal({ action, id }) {
     return (
         <>
             <button id={id} onClick={onClick} className={action === 'add' || action === 'add-contact' ? 'btn' : 'action-btn'}>{buttonTitle}</button>
-            {modalOpen && createPortal(
-                <ModalContent />,
+            {showModal && createPortal(
+                <ModalContent onClose={() => setShowModal(false)} />,
                 document.body
             )}
         </>

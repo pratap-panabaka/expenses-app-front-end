@@ -1,15 +1,15 @@
 import { useLogout } from "../hooks/useLogout";
 import { useModalContext } from "../hooks/useModalContext";
 
-const Logout = () => {
+const Logout = ({onClose}) => {
 
     const { logout } = useLogout();
-    const { setModalOpen, setId } = useModalContext();
+    const { setId } = useModalContext();
 
     const onLogout = () => {
         logout();
-        setModalOpen(false);
         setId(null);
+        onClose();
     }
 
     return (
@@ -17,7 +17,7 @@ const Logout = () => {
             <h1 className="font-bold text-xl p-5">Are you sure to Logout?</h1>
             <div className="flex gap-2 justify-center">
                 <button className="btn" onClick={onLogout} autoFocus>Logout</button>
-                <button className="btn" onClick={() => setModalOpen(false)}>No</button>
+                <button className="btn" onClick={onClose}>No</button>
             </div>
         </div>
     )

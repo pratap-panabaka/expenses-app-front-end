@@ -1,31 +1,27 @@
 import { useEffect } from "react";
-import {useModalContext} from "../hooks/useModalContext";
-import EditExpense from "./EditExpense";
-import AddExpense from "./AddExpense";
+import { useModalContext } from "../hooks/useModalContext";
+import EditExpense from "./expenses/EditExpense";
+import AddExpense from "./expenses/AddExpense";
 import Logout from "./Logout";
-import AddContact from "./AddContact";
-import EditContact from "./EditContact";
-import DeleteContact from "./DeleteContact";
-import DeleteExpense from "./DeleteExpense";
+import AddContact from "./contacts/AddContact";
+import EditContact from "./contacts/EditContact";
+import DeleteContact from "./contacts/DeleteContact";
+import DeleteExpense from "./expenses/DeleteExpense";
 
-export default function ModalContent() {
+export default function ModalContent({ onClose }) {
 
-    const { modalOpen, setModalOpen, popup, setPopup, setId } = useModalContext();
+    const { popup, setPopup, setId } = useModalContext();
 
     useEffect(() => {
         const esc = (e) => {
             if (e.keyCode === 27) {
-                setModalOpen(false);
+                onClose();
             }
         };
 
-        if (modalOpen) {
-            document.body.addEventListener('keydown', esc);
-            document.body.style.overflow = 'hidden';
-        }
+        document.body.addEventListener('keydown', esc);
+        document.body.style.overflow = 'hidden';
 
-        console.log('I am loading too many times');
-        
         return () => {
             document.body.removeEventListener('keydown', esc);
 
@@ -33,33 +29,32 @@ export default function ModalContent() {
             document.body.style['overflow-x'] = 'hidden';
             setPopup(null);
             setId(null);
-            setModalOpen(false);
         }
 
-    }, [modalOpen, setId, setModalOpen, setPopup])
+    }, [setId, setPopup, onClose])
 
     return (
-        <div className="absolute top-0 left-0 w-screen h-screen bg-black/10 flex text-center justify-center items-center p-5 z-50">
+        <div className="absolute top-0 left-0 w-screen h-screen bg-black/40 flex text-center justify-center items-center p-5 z-50">
             {
-                popup === 'add' && <AddExpense />
+                popup === 'add' && <AddExpense onClose={onClose} />
             }
             {
-                popup === 'edit' && <EditExpense />
+                popup === 'edit' && <EditExpense onClose={onClose} />
             }
             {
-                popup === 'delete' && <DeleteExpense />
+                popup === 'delete' && <DeleteExpense onClose={onClose} />
             }
             {
-                popup === 'logout' && <Logout />
+                popup === 'logout' && <Logout onClose={onClose} />
             }
             {
-                popup === 'add-contact' && <AddContact />
+                popup === 'add-contact' && <AddContact onClose={onClose} />
             }
             {
-                popup === 'edit-contact' && <EditContact />
+                popup === 'edit-contact' && <EditContact onClose={onClose} />
             }
             {
-                popup === 'delete-contact' && <DeleteContact />
+                popup === 'delete-contact' && <DeleteContact onClose={onClose} />
             }
         </div>
     );

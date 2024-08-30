@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useModalContext } from "../hooks/useModalContext";
-import host from "../host";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useExpensesContext } from "../../hooks/useExpensesContext";
+import host from "../../host";
 
-const ExpenseForm = () => {
+const ExpenseForm = ({ onClose }) => {
 
     const { user } = useAuthContext();
-    const { setModalOpen } = useModalContext();
+    const { dispatch } = useExpensesContext();
 
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
@@ -31,8 +31,9 @@ const ExpenseForm = () => {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
+            const json = await response.json();
             if (response.ok) {
-                console.log('response OK')
+                dispatch({ type: 'ADD_EXPENSE', payload: json })
             }
         } catch (error) {
             console.log(error);
@@ -42,7 +43,7 @@ const ExpenseForm = () => {
         setAmount('');
         setError('');
         e.target.reset();
-        setModalOpen(false);
+        onClose();
     }
 
     return (
@@ -60,7 +61,7 @@ const ExpenseForm = () => {
                     <button type="submit" className='btn'>
                         Add Expense
                     </button>
-                    <button type="button" className="btn" onClick={() => setModalOpen(false)}>Cancel</button>
+                    <button type="button" className="btn" onClick={onClose}>Cancel</button>
                 </div>
                 {error && <h2>{error}</h2>}
             </form>

@@ -1,10 +1,12 @@
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useModalContext } from "../hooks/useModalContext";
-import host from "../host";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useContactsContext } from "../../hooks/useContactsContext";
+import { useModalContext } from "../../hooks/useModalContext";
+import host from "../../host";
 
-const DeleteContact = () => {
+const DeleteContact = ({ onClose }) => {
     const { user } = useAuthContext();
-    const { setModalOpen, id } = useModalContext();
+    const { id } = useModalContext();
+    const { dispatch } = useContactsContext();
 
     const onDel = () => {
         const delContact = async () => {
@@ -15,8 +17,10 @@ const DeleteContact = () => {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
+            const json = await response.json();
+            dispatch({ type: "DELETE_CONTACT", payload: json });
             if (response.ok) {
-                setModalOpen(false);
+                onClose();
             }
         }
         if (user) {
@@ -29,7 +33,7 @@ const DeleteContact = () => {
             <h1 className="font-bold text-xl p-5">Are you sure to Delete?</h1>
             <div className="flex gap-2 justify-center">
                 <button className="btn" onClick={onDel} autoFocus>Delete</button>
-                <button className="btn" onClick={() => setModalOpen(false)}>No</button>
+                <button className="btn" onClick={onClose}>No</button>
             </div>
         </div>
     )

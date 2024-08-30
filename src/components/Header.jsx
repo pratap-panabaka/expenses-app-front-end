@@ -22,7 +22,7 @@ function Header() {
 
                 {user && (
                     <div className="flex flex-col xs:flex-row xs:space-x-2 justify-center items-center text-white">
-                        <p>{user.email}</p>
+                        <p className="font-bold">{user.email}</p>
                         <Portal action={"logout"} />
                     </div>
                 )}

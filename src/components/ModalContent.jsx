@@ -24,6 +24,8 @@ export default function ModalContent() {
             document.body.style.overflow = 'hidden';
         }
 
+        console.log('I am loading too many times');
+        
         return () => {
             document.body.removeEventListener('keydown', esc);
 
@@ -33,6 +35,7 @@ export default function ModalContent() {
             setId(null);
             setModalOpen(false);
         }
+
     }, [modalOpen, setId, setModalOpen, setPopup])
 
     return (

@@ -1,8 +1,6 @@
-import { Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAuthContext } from "../hooks/useAuthContext.js";
 import { useModalContext } from '../hooks/useModalContext.js';
-import { useLogout } from '../hooks/useLogout.js';
 import host from '../host.js';
 import Portal from '../components/Portal.jsx';
 import intToWords from '../utils/intToWords.js';
@@ -10,7 +8,6 @@ import intToWords from '../utils/intToWords.js';
 function Expenses() {
     const { user } = useAuthContext();
     const { modalOpen, setModalOpen, setPopup } = useModalContext();
-    const { logout } = useLogout();
 
     const [expenses, setExpenses] = useState(null);
     const [showError, setShowError] = useState(null);
@@ -31,6 +28,8 @@ function Expenses() {
             }
         }
 
+        console.log('I am from expenses page');
+
         if (!modalOpen) {
             document.body.addEventListener('keydown', backtick);
         }
@@ -46,10 +45,6 @@ function Expenses() {
                 setExpenses(json);
             } catch (error) {
                 setShowError(true);
-                if (user) {
-                    logout();
-                    <Navigate to="/" />
-                }
             }
         }
         if (user) {
@@ -59,7 +54,7 @@ function Expenses() {
         return () => {
             document.body.removeEventListener('keydown', backtick);
         }
-    }, [user, modalOpen, setModalOpen, setPopup, logout]);
+    }, [user, modalOpen, setModalOpen, setPopup]);
 
     return (
         <>

@@ -21,6 +21,8 @@ function Contacts() {
             }
         }
 
+        console.log('I am from contacts page');
+
         if (!modalOpen) {
             document.body.addEventListener('keydown', backtick);
         }

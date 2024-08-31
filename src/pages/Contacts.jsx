@@ -8,7 +8,7 @@ import host from '../host.js';
 function Contacts() {
     const { user } = useAuthContext();
     const { setPopup } = useModalContext();
-    const {contacts, dispatch} = useContactsContext();
+    const { contacts, dispatch } = useContactsContext();
     const [showError, setShowError] = useState(null);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ function Contacts() {
                     }
                 });
                 const json = await response.json(); // expect array of objects
-                dispatch({type: "GET_CONTACTS", payload: json})
+                dispatch({ type: "GET_CONTACTS", payload: json })
             } catch (error) {
                 setShowError(true);
             }
@@ -33,10 +33,9 @@ function Contacts() {
     }, [user, setPopup, dispatch]);
 
     return (
-        <>
-            <div className="bg-toolite grid grid-cols-6">
-                <div></div>
-                <div className='min-height bg-dark overflow-x-hidden col-span-6 xl:col-span-4'>
+        <div className="max-w-6xl mx-auto">
+            <div className='min-height bg-dark overflow-x-hidden w-full'>
+                <div className='min-height bg-dark overflow-x-hidden'>
                     <div className='grid grid-cols-3 items-center justify-center'>
                         <p>{ }</p>
                         <h1 className='text-center text-white font-bold text-xl p-4'>Contacts List</h1>
@@ -83,7 +82,7 @@ function Contacts() {
                     }
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

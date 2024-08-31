@@ -56,7 +56,7 @@ function Expenses() {
                         <Portal action={"add"} />
                     </div>
                     <table className='table-auto w-full'>
-                        <thead>
+                        <thead className='bg-[#009879]'>
                             <tr>
                                 <th>S.No</th>
                                 <th>Date</th>

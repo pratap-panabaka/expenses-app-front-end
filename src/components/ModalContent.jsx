@@ -34,7 +34,7 @@ export default function ModalContent({ onClose }) {
     }, [setId, setPopup, onClose])
 
     return (
-        <div className="absolute top-0 left-0 w-screen h-screen bg-black/40 flex text-center justify-center items-center p-5 z-50">
+        <div className="fixed top-0 left-0 w-screen h-screen bg-black/40 flex text-center justify-center items-center p-5 z-50">
             {
                 popup === 'add' && <AddExpense onClose={onClose} />
             }

@@ -55,7 +55,7 @@
   }
 
   form button,
-  div > button {
+  div>button {
     @apply focus:ring-white
   }
 
@@ -63,13 +63,6 @@
     @apply p-2
   }
 
-  table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
-    font-size: 18px;
-  }
-  
   th,
   td {
     border: 1px solid black;

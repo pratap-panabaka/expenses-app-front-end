@@ -50,7 +50,7 @@ function Contacts() {
                         <Portal action={"add-contact"} />
                     </div>
                     <table className='table-auto w-full'>
-                        <thead>
+                        <thead className='bg-[#009879]'>
                             <tr>
                                 <th colSpan={1}>S.No</th>
                                 <th colSpan={5}>Name</th>

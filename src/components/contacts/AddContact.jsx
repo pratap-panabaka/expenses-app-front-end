@@ -6,7 +6,7 @@ import { useContactsContext } from "../../hooks/useContactsContext";
 const AddContact = ({ onClose }) => {
 
     const { user } = useAuthContext();
-    const {dispatch} = useContactsContext();
+    const { dispatch } = useContactsContext();
 
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -37,10 +37,6 @@ const AddContact = ({ onClose }) => {
                 type: "ADD_CONTACT",
                 payload: json
             });
-
-            if (response.ok) {
-                console.log('response OK')
-            }
         } catch (error) {
             console.log(error);
         }
@@ -61,7 +57,7 @@ const AddContact = ({ onClose }) => {
                     autoFocus
                 />
                 <input placeholder="Phone - Min length 3" type="tel"
-                    pattern="(?=.{3,20}$)((\+)?(\d)((?:-|\s)?(\d))+)"
+                    pattern="(?=.{2,20}$)((\+)?(\d)((?:-|\s)?(\d))+)"
                     value={phone || ''}
                     onChange={(e) => setPhone(e.target.value)} required name="phone"
                     autoComplete="off"

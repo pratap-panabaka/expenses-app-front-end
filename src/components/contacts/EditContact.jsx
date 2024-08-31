@@ -71,16 +71,23 @@ const EditContact = ({ onClose }) => {
     return (
         <div className="max-width z-50">
             < form className="flex flex-col gap-5 p-5 bg-lite w-full border-4 border-toodark" onSubmit={editContact}>
-                <input placeholder="Name" type="text" value={name || ''}
-                    onChange={(e) => setName(e.target.value)} required name="name"
-                    autoComplete="off"
-                    autoFocus
-                />
-                <input placeholder="Phone" type="tel"
-                    pattern="(?=.{2,20}$)((\+)?(\d)((?:-|\s)?(\d))+)"
-                    value={phone || ''}
-                    onChange={(e) => setPhone(e.target.value)} required name="phone"
-                />
+                <div className="flex flex-col">
+                    <label className="text-left">Name</label>
+                    <input placeholder="Name" type="text" value={name || ''}
+                        onChange={(e) => setName(e.target.value)} required name="name"
+                        autoComplete="off"
+                        autoFocus
+                    />
+                </div>
+                <div className="flex flex-col">
+                    <label className="text-left">Phone</label>
+                    <input placeholder="Phone - Min length 3" type="tel"
+                        pattern="(?=.{2,20}$)((\+)?(\d)((?:-|\s)?(\d))+)"
+                        value={phone || ''}
+                        onChange={(e) => setPhone(e.target.value)} required name="phone"
+                        autoComplete="off"
+                    />
+                </div>
                 <div className="flex gap-2 justify-center">
                     <button type="submit" className='btn'>
                         Save Edits

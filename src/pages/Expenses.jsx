@@ -40,21 +40,21 @@ function Expenses() {
 
     return (
         <div className="max-w-6xl mx-auto">
-            <div className='min-height bg-dark overflow-x-hidden w-full'>
-                <div className='grid grid-cols-3 items-center justify-center'>
-                    <p>{ }</p>
-                    <h1 className='text-center text-white font-bold text-xl p-4'>Expenses List</h1>
-                    <Portal action={"add"} />
-                </div>
-                {
-                    showError && (
-                        <h1 className='center-div font-bold text-white text-2xl min-h-[calc(100vh-8rem)]'>
-                            Fetch Error, Check backend conncted and running?
-                        </h1>
-                    )
-                }
-                {
-                    expenses &&
+            {
+                showError && (
+                    <h1 className='center-div font-bold text-2xl min-h-[calc(100vh-8rem)]'>
+                        Fetch Error, Check backend conncted and running?
+                    </h1>
+                )
+            }
+            {
+                expenses &&
+                <div className='min-height bg-dark overflow-x-hidden w-full'>
+                    <div className='grid grid-cols-3 items-center justify-center'>
+                        <p>{ }</p>
+                        <h1 className='text-center text-white font-bold text-xl p-4'>Expenses List</h1>
+                        <Portal action={"add"} />
+                    </div>
                     <table className='table-auto w-full'>
                         <thead>
                             <tr>
@@ -100,8 +100,8 @@ function Expenses() {
                             }
                         </tbody>
                     </table>
-                }
-            </div>
+                </div>
+            }
         </div>
     )
 }

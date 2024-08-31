@@ -34,55 +34,52 @@ function Contacts() {
 
     return (
         <div className="max-w-6xl mx-auto">
-            <div className='min-height bg-dark overflow-x-hidden w-full'>
-                <div className='min-height bg-dark overflow-x-hidden'>
+            {
+                showError && (
+                    <h1 className='center-div font-bold text-2xl min-h-[calc(100vh-8rem)]'>
+                        Fetch Error, Check backend conncted and running?
+                    </h1>
+                )
+            }
+            {
+                contacts &&
+                <div className='min-height bg-dark overflow-x-hidden w-full'>
                     <div className='grid grid-cols-3 items-center justify-center'>
                         <p>{ }</p>
                         <h1 className='text-center text-white font-bold text-xl p-4'>Contacts List</h1>
                         <Portal action={"add-contact"} />
                     </div>
-                    {
-                        showError && (
-                            <h1 className='center-div font-bold text-white text-2xl min-h-[calc(100vh-8rem)]'>
-                                Fetch Error, Check backend conncted and running?
-                            </h1>
-                        )
-                    }
-                    {
-                        contacts && (
-                            <table className='table-auto w-full'>
-                                <thead>
-                                    <tr>
-                                        <th colSpan={1}>S.No</th>
-                                        <th colSpan={5}>Name</th>
-                                        <th colSpan={4}>Phone Number</th>
-                                        <th colSpan={2} >Actions</th>
+                    <table className='table-auto w-full'>
+                        <thead>
+                            <tr>
+                                <th colSpan={1}>S.No</th>
+                                <th colSpan={5}>Name</th>
+                                <th colSpan={4}>Phone Number</th>
+                                <th colSpan={2} >Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                contacts.map((contact, idx) =>
+                                (
+                                    <tr key={contact.id}>
+                                        <td colSpan={1} align='center'>{idx + 1}</td>
+                                        <td colSpan={5} align='center'>{contact.name}</td>
+                                        <td colSpan={4} align='center'>{contact.phone}</td>
+                                        <td colSpan={1} align='center'>
+                                            <Portal id={contact.id} action={"edit-contact"} />
+                                        </td>
+                                        <td colSpan={1} align='center'>
+                                            <Portal id={contact.id} action={"delete-contact"} />
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        contacts.map((contact, idx) =>
-                                        (
-                                            <tr key={contact.id}>
-                                                <td colSpan={1} align='center'>{idx + 1}</td>
-                                                <td colSpan={5} align='center'>{contact.name}</td>
-                                                <td colSpan={4} align='center'>{contact.phone}</td>
-                                                <td colSpan={1} align='center'>
-                                                    <Portal id={contact.id} action={"edit-contact"} />
-                                                </td>
-                                                <td colSpan={1} align='center'>
-                                                    <Portal id={contact.id} action={"delete-contact"} />
-                                                </td>
-                                            </tr>
-                                        ))
-                                    }
-                                </tbody>
-                            </table>
-                        )
-                    }
+                                ))
+                            }
+                        </tbody>
+                    </table>
                 </div>
-            </div>
-        </div>
+            }
+        </div >
     )
 }
 
